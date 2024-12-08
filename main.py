@@ -25,7 +25,7 @@ def googletrends_queries(keywords, geo, loops=3, wait=10, csv='trends.csv', time
                 req = json.dumps(pytrends.interest_over_time_widget["request"])
                 
                 trends[g][k] = pytrends.interest_over_time()[k]
-                #print(cnt, 'Success: ', g, k)
+                print(cnt, 'Success: ', g, k)
 
             except Exception as e:
                 print(cnt, ') Error: ', g, ' & ', k)
@@ -60,7 +60,7 @@ def googletrends_queries(keywords, geo, loops=3, wait=10, csv='trends.csv', time
     ### Save dataframe
     dict_of_trends = {g: pd.DataFrame(k) for g,k in trends.items()}
     data_df = pd.concat(dict_of_trends, axis=1)
-    data_df.to_csv(csv,index=False)
+    data_df.to_csv(csv,index=True)
     
     return data_df
 
@@ -78,8 +78,8 @@ if __name__ == "__main__":
     geo.sort()
 
     # date frames
-    start_date = "2023-01-01"
-    end_date = "2023-12-31"
+    start_date = "2004-01-01"
+    end_date = "2024-12-01"
     date_frame = start_date + " " + end_date if start_date != "" and end_date != "" else "all"
     
     # Perform searches
